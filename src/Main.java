@@ -4,10 +4,9 @@ public class Main {
     public static int bossHealth = 999;
     public static int bossDamage = 50;
     public static String bossDefenceType;
-    public static int[] heroesHealth = {250, 260, 270, 250, 200, 260};
-    public static int[] heroesDamage = {25, 20, 15, 0, 20, 30};
-    public static String[] heroesAttackType = {"Physical", "Magical", "Kinetic", "Medic", "Lucky", "Thor"};
-    public static int docHeal = 10;
+    public static int[] heroesHealth = {250, 260, 270, 250, 200, 260, 444, 250};
+    public static int[] heroesDamage = {25, 20, 15, 0, 20, 30, 10, 20};
+    public static String[] heroesAttackType = {"Physical", "Magical", "Kinetic", "Medic", "Lucky", "Thor", "Golem", "Berserk"};
     public static int roundNumber = 0;
 
     public static void main(String[] args) {
@@ -23,6 +22,8 @@ public class Main {
         thunderFromThor();
         isLuckyLucky();
         bossHits();
+        berserkHitBack();
+        golemDefensing();
         heroesHit();
         medicHealing();
         printStatistics();
@@ -33,6 +34,23 @@ public class Main {
         Random random = new Random();
         int randomIndex = random.nextInt(heroesAttackType.length); // 0,1,2
         bossDefenceType = heroesAttackType[randomIndex];
+    }
+
+    public static void golemDefensing() {
+        for (int i = 0; i < heroesHealth.length; i++) {
+            if (heroesHealth[6] > 0 && heroesHealth[i] > 0 && heroesHealth[6] != heroesHealth[i]) {
+                heroesHealth[i] += bossDamage / 5;
+                heroesHealth[6] -= bossDamage / 5;
+
+            }
+        }
+    }
+
+    public static void berserkHitBack(){
+        if (heroesHealth[7]>0 && bossHealth>0 && bossDamage>0){
+            heroesHealth[7]+=bossDamage/2;
+            heroesDamage[7]+=bossDamage/2;
+        }
     }
 
     public static void thunderFromThor() {
